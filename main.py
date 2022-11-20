@@ -4,7 +4,21 @@ import pandas as pd
 from PIL import Image
 import time
 
+
+
 st.title('Streamlit 入門')
+
+st.write('プログレスバー')
+'Start'
+
+latest_iteration =st.empty()
+bar =st.progress(0.0)
+for i in range(100):
+    latest_iteration.text(f'Iteration{i+1}')
+    bar.progress(i+1)
+    time.sleep(0.2)
+
+'Done'
 
 st.write('DataFrame')
 
@@ -51,17 +65,33 @@ use_column_width=True
 ディスプレイのサイズに合わせる
 """
 
-st.write('インタラクティブウィジェット「')
+st.sidebar.write('インタラクティブウィジェット')
 option=st.selectbox(
     '好きな数字は?',
     options=list(range(1,11))
 )
 '好きな数字は',option,'です'
 
-option2=st.text_input(
-    'your hobby?'
-)
+#option2=st.sidebar.text_input(
+option2=st.text_input('your hobby?')
 'your hobby is',option2
 
 option3 = st.slider('How old are you?', 0, 100, 25)
+#option3 = st.sidebar.slider('How old are you?', 0, 100, 25)
 'your old is',option3
+
+
+
+left_column,right_columns=st.columns(2)
+button=left_column.button('右からむに表示')
+if button:
+    right_columns.write('右からむ')
+
+sxpander=st.expander('問い合わせ')
+sxpander.write('問い合わせの回答')
+
+
+
+
+
+
